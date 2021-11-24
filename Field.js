@@ -62,10 +62,9 @@ module.exports = class Field {
 
     static generateField(height, width, holePercentage) {
 
-        const numberOfItems = height * width - 2;
-        const plainArray = [];
-        // put 1 hat
-        plainArray.push(hat);
+        const numberOfItems = height * width;
+        const plainArray = [hat];
+        console.log(plainArray.length);
         // determine number of holes
         const remainingItems = numberOfItems - 1;
         const holes = Math.floor(remainingItems * holePercentage / 100);
@@ -75,16 +74,16 @@ module.exports = class Field {
             plainArray.push(hole);
 
         }
+        console.log(plainArray.length);
         // determine number of fields
-        const fields = remainingItems - holes;
+        const fields = remainingItems - holes - 1;
 
         for (let i = 0; i < fields; i++) {
 
             plainArray.push(fieldCharacter);
 
         }
-
-
+        console.log(plainArray.length);
         // randomize array 
         for (let i = plainArray.length - 1; i > 0; i--) {
 
@@ -92,16 +91,14 @@ module.exports = class Field {
             [plainArray[i], plainArray[j]] = [plainArray[j], plainArray[i]];
 
         }
-
         // add player starting position
         plainArray.unshift(pathCharacter);
-
+        console.log(plainArray.length);
         // create multidimensional array
         const twoDimensionalField = [];
         let chunk = [];
 
         for (let item of plainArray) {
-
             chunk.push(item);
 
             if (chunk.length === width) {
